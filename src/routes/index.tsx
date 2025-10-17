@@ -1,14 +1,14 @@
-// import { imageFrom } from "@ec/domain/utils/images";
 // import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@ec/ui/components/form";
 // import { Input } from "@ec/ui/components/input";
 // import { Textarea } from "@ec/ui/components/textarea";
-// import { QUOTE } from "@ec/ui/styles/app/index";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { tv } from "tailwind-variants";
 // import { useForm } from "react-hook-form";
 // import { SubscribeButton } from "@/components/button-subscribe";
-// import { GridBackground } from "@/components/grid-background";
-// import { Hero } from "@/components/hero";
-// import { Section, SectionContent, SectionImage, SectionMain, SectionTitle } from "@/components/section";
+import { GridBackground } from "@/components/grid-background";
+import { Hero } from "@/components/hero";
+import { Section, SectionContent, SectionImage, SectionMain, SectionTitle } from "@/components/section";
+import { readIndexPage } from "@/data/pages";
 // import { WorksGrid } from "@/components/works-grid";
 
 // SERVER ----------------------------------------------------------------------------------------------------------------------------------
@@ -17,22 +17,41 @@ import { createFileRoute } from "@tanstack/react-router";
 // ROUTE -----------------------------------------------------------------------------------------------------------------------------------
 export const Route = createFileRoute("/")({
   component: IndexPage,
-  // loader: async () => await readIndexPage(),
+  loader: async () => await readIndexPage(),
 });
+
+// STYLES ----------------------------------------------------------------------------------------------------------------------------------
+export const QUOTE = tv({
+  slots: {
+    author: `text-lg font-black text-neutral-500
+    sm:text-xl
+    md:text-2xl
+    2xl:text-3xl`,
+    base: `relative px-4 py-8
+    sm:px-8
+    md:py-20`,
+    content: `relative flex flex-col items-center gap-4
+    sm:gap-8`,
+    sentence: `font-heading font-bold text-3xl text-center
+    sm:text-5xl
+    md:text-6xl
+    2xl:text-7xl`,
+  },
+})();
 
 // PAGE ------------------------------------------------------------------------------------------------------------------------------------
 function IndexPage() {
-  // const { contact, hero, quote, works } = Route.useLoaderData();
+  const { contact, hero, quote, works } = Route.useLoaderData();
 
   return (
     <>
-      {/* <Hero button={<Link to="/">{hero.button}</Link>} className={{ aside: "flex" }} image={imageFrom(hero.image)} title={hero.title}>
+      <Hero button={<Link to="/">{hero.button}</Link>} className={{ aside: "flex" }} image={hero.image} title={hero.title}>
         {hero.content}
       </Hero>
       <Section className={{ base: "lg:-mt-20" }} intent="secondary">
         <SectionMain>
           <SectionTitle intent="secondary" title={works.title} />
-          <WorksGrid works={works.items} />
+          {/* <WorksGrid works={works.items} /> */}
         </SectionMain>
       </Section>
       <section className={QUOTE.base()}>
@@ -43,13 +62,13 @@ function IndexPage() {
         </div>
       </section>
       <Section id="contact" intent="primary">
-        <SectionImage image={imageFrom(contact.image)} reverse />
+        <SectionImage image={contact.image} reverse />
         <SectionMain>
           <SectionTitle title={contact.title} />
           <SectionContent>{contact.content}</SectionContent>
-          <AppIndexForm />
+          {/* <AppIndexForm /> */}
         </SectionMain>
-      </Section> */}
+      </Section>
     </>
   );
 }
