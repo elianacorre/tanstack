@@ -1,0 +1,64 @@
+{
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.biome": "explicit"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#7190ab",
+    "activityBar.background": "#7190ab",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#dbc3d0",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#7190ab",
+    "statusBar.background": "#577792",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#7190ab",
+    "statusBarItem.remoteBackground": "#577792",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#577792",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#57779299",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#577792",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[graphql]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "emmet.showExpandedAbbreviation": "never"
+}
