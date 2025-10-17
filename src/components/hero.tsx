@@ -1,7 +1,4 @@
-// import type { Images } from "@ec/domain/schemas/images";
 import { Image } from "@unpic/react";
-import { domAnimation, LazyMotion, type Transition } from "motion/react";
-import { div as Mdiv } from "motion/react-m";
 import type { ComponentProps, ReactNode } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import type { Images } from "@/data/images";
@@ -18,17 +15,12 @@ const heroStyles = tv({
     main: "flex flex-col items-center gap-8 lg:items-start",
     title: "flex flex-col items-center font-black text-[42px] leading-none sm:text-7xl lg:items-start 2xl:text-8xl",
     titleRow: "flex items-center gap-1 whitespace-nowrap text-primary",
-    titleRowContent: "w-0 overflow-hidden leading-tight",
-    titleRowCursor: "h-10 w-1 rounded-sm bg-primary opacity-0 sm:h-16",
+    titleRowContent: `max-w-full overflow-hidden leading-tight transition-all delay-1000 duration-[2s] ease-linear
+    starting:max-w-0`,
+    titleRowCursor: "h-10 w-1 animate-blink rounded-sm bg-primary sm:h-16",
   },
 });
 const HERO = heroStyles();
-
-// TRANSITIONS -----------------------------------------------------------------------------------------------------------------------------
-export const HERO_T = {
-  content: { duration: 2, ease: "linear", delay: 1 },
-  cursor: { duration: 0.8, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" },
-} satisfies Record<string, Transition>;
 
 // ROOT ------------------------------------------------------------------------------------------------------------------------------------
 export function Hero({ button, children, className: C = {}, image, title }: HeroProps) {
@@ -38,7 +30,10 @@ export function Hero({ button, children, className: C = {}, image, title }: Hero
       <main className={HERO.main({ className: C.main })}>
         <h1 className={HERO.title({ className: C.title })}>
           <span>{title[0]}</span>
-          <HeroTitleEffect text={title[1]} />
+          <div className={HERO.titleRow({ className: C.titleRow })}>
+            <div className={HERO.titleRowContent({ className: C.titleRowContent })}>{title[1]}</div>
+            <div className={HERO.titleRowCursor({ className: C.titleRowCursor })} />
+          </div>
         </h1>
         <div className={HERO.content({ className: C.content })}>{children}</div>
         {button && <ButtonAnimated>{button}</ButtonAnimated>}
@@ -56,28 +51,6 @@ export function Hero({ button, children, className: C = {}, image, title }: Hero
 }
 type HeroProps = Omit<ComponentProps<"section">, "className" | "title"> &
   HeroStyles & { button?: ReactNode; image: Images["Entity"]; title: string[] };
-
-// EFFECT-----------------------------------------------------------------------------------------------------------------------------------
-function HeroTitleEffect({ className: C = {}, text }: HeroTitleEffectProps) {
-  return (
-    <div className={HERO.titleRow({ className: C.titleRow })}>
-      <LazyMotion features={domAnimation}>
-        <Mdiv
-          className={HERO.titleRowContent({ className: C.titleRowContent })}
-          transition={HERO_T.content}
-          whileInView={{ width: "fit-content" }}
-        >
-          {text}
-        </Mdiv>
-        <Mdiv animate={{ opacity: 1 }} className={HERO.titleRowCursor({ className: C.titleRowCursor })} transition={HERO_T.cursor} />
-      </LazyMotion>
-    </div>
-  );
-}
-type HeroTitleEffectProps = HeroVariants & {
-  className?: Pick<HeroClass, "titleRow" | "titleRowContent" | "titleRowCursor">;
-  text?: string;
-};
 
 // TYPES -----------------------------------------------------------------------------------------------------------------------------------
 type HeroClass = Partial<(typeof heroStyles)["slots"]>;
