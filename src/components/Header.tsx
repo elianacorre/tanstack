@@ -1,218 +1,112 @@
-import { Link } from '@tanstack/react-router'
+// ROOT ------------------------------------------------------------------------------------------------------------------------------------
+// export function RootLayoutHeader({ image, navs, socials }: RootLayoutHeaderProps) {
+//   const { location } = useRouterState();
+//   const { scrollY } = useScroll();
+//   const isScrolled = useStore(publicStore, (state) => state.isScrolled);
 
-import { useState } from 'react'
-import {
-  ChevronDown,
-  ChevronRight,
-  ClipboardType,
-  Home,
-  Menu,
-  Network,
-  SquareFunction,
-  StickyNote,
-  Store,
-  X,
-} from 'lucide-react'
+//   useMotionValueEvent(scrollY, "change", (latest) => setIsScrolled(latest > 1));
 
-export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [groupedExpanded, setGroupedExpanded] = useState<
-    Record<string, boolean>
-  >({})
+//   const handleOnMouseLeave = useCallback(() => setHeaderHoveredId(), []);
 
-  return (
-    <>
-      <header className="p-4 flex items-center bg-gray-800 text-white shadow-lg">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-          aria-label="Open menu"
-        >
-          <Menu size={24} />
-        </button>
-        <h1 className="ml-4 text-xl font-semibold">
-          <Link to="/">
-            <img
-              src="/tanstack-word-logo-white.svg"
-              alt="TanStack Logo"
-              className="h-10"
-            />
-          </Link>
-        </h1>
-      </header>
+//   return (
+//     <motion.header className={HEADER.base({ isScrolled })} layoutRoot transition={HEADER_T.base}>
+//       <motion.div
+//         animate={isScrolled ? "scrolled" : "top"}
+//         className={HEADER.content()}
+//         layout
+//         onMouseLeave={handleOnMouseLeave}
+//         transition={HEADER_T.content}
+//         variants={HEADER_V.content}
+//       >
+//         <Link to="/">
+//           <HeaderLogo>
+//             <Image {...image} background="transparent" sizes="(min-width: 768px) 160px, 80px" />
+//           </HeaderLogo>
+//         </Link>
+//         <div className={HEADER.navs()}>
+//           {navs.map((nav) => (
+//             <Link key={nav.id} to={nav.href}>
+//               <HeaderNav isActive={location.pathname === nav.href} nav={nav} />
+//             </Link>
+//           ))}
+//         </div>
+//         <div className={HEADER.icons()}>
+//           <div className={HEADER.socials()}>
+//             {socials.map((social) => (
+//               <HeaderSocial key={social.id} social={social} />
+//             ))}
+//           </div>
+//           {/* <Sheet>
+// 						<SheetTrigger
+// 							onMouseEnter={() => setHeaderHoveredId("menu")}
+// 							onClick={() => setHeaderHoveredId(undefined)}
+// 							className={BURGER()}
+// 						>
+// 							{headerHoveredId === "menu" && <motion.div layoutId="hovered" className={STAIN({ intent: "primary" })} />}
+// 							<MenuIcon className={STAIN_CONTENT()} />
+// 						</SheetTrigger>
+// 						<SheetContent>
+// 							<SheetHeader>
+// 								<SheetTitle>Are you absolutely sure?</SheetTitle>
+// 								<SheetDescription>
+// 									This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+// 								</SheetDescription>
+// 							</SheetHeader>
+// 						</SheetContent>
+// 					</Sheet> */}
+//         </div>
+//       </motion.div>
+//     </motion.header>
+//   );
+// }
+// export type RootLayoutHeaderProps = {
+//   image: { height: number; width: number; alt: string; src: string };
+//   navs: { href: string; id: string; text: string }[];
+//   socials: { href: string; icon: ReactNode; id: string; text: string }[];
+// };
 
-      <aside
-        className={`fixed top-0 left-0 h-full w-80 bg-gray-900 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        <div className="flex items-center justify-between p-4 border-b border-gray-700">
-          <h2 className="text-xl font-bold">Navigation</h2>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-            aria-label="Close menu"
-          >
-            <X size={24} />
-          </button>
-        </div>
+// // LOGO ------------------------------------------------------------------------------------------------------------------------------------
+// export function HeaderLogo({ children }: HeaderLogoProps) {
+//   const isScrolled = useStore(publicStore, (state) => state.isScrolled);
 
-        <nav className="flex-1 p-4 overflow-y-auto">
-          <Link
-            to="/"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Home size={20} />
-            <span className="font-medium">Home</span>
-          </Link>
+//   return (
+//     <button className={HEADER.logo()} type="button">
+//       <motion.div className={HEADER.logoContent({ isScrolled })} layout transition={HEADER_T.logoContent}>
+//         {children}
+//       </motion.div>
+//     </button>
+//   );
+// }
+// export type HeaderLogoProps = PropsWithChildren;
 
-          {/* Demo Links Start */}
+// // NAV -------------------------------------------------------------------------------------------------------------------------------------
+// export function HeaderNav({ isActive, nav }: HeaderNavProps) {
+//   const { id, text } = nav;
+//   const isVisible = useStore(publicStore, ({ headerHoveredId }) => headerHoveredId === id || (!headerHoveredId && isActive));
 
-          <Link
-            to="/demo/start/server-funcs"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <SquareFunction size={20} />
-            <span className="font-medium">Start - Server Functions</span>
-          </Link>
+//   const handleOnMouseEnter = useCallback(() => setHeaderHoveredId(id), [id]);
 
-          <Link
-            to="/demo/start/api-request"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Network size={20} />
-            <span className="font-medium">Start - API Request</span>
-          </Link>
+//   return (
+//     <button className={HEADER.nav()} onMouseEnter={handleOnMouseEnter} type="button">
+//       {isVisible && <motion.div className={HEADER.stain()} layoutId="hovered" />}
+//       <span className={HEADER.stainContent()}>{text}</span>
+//     </button>
+//   );
+// }
+// export type HeaderNavProps = { isActive: boolean; nav: { id: string; text: string; href: string } };
 
-          <div className="flex flex-row justify-between">
-            <Link
-              to="/demo/start/ssr"
-              onClick={() => setIsOpen(false)}
-              className="flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-              activeProps={{
-                className:
-                  'flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-              }}
-            >
-              <StickyNote size={20} />
-              <span className="font-medium">Start - SSR Demos</span>
-            </Link>
-            <button
-              className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
-              onClick={() =>
-                setGroupedExpanded((prev) => ({
-                  ...prev,
-                  StartSSRDemo: !prev.StartSSRDemo,
-                }))
-              }
-            >
-              {groupedExpanded.StartSSRDemo ? (
-                <ChevronDown size={20} />
-              ) : (
-                <ChevronRight size={20} />
-              )}
-            </button>
-          </div>
-          {groupedExpanded.StartSSRDemo && (
-            <div className="flex flex-col ml-4">
-              <Link
-                to="/demo/start/ssr/spa-mode"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">SPA Mode</span>
-              </Link>
+// // SOCIAL ----------------------------------------------------------------------------------------------------------------------------------
+// export function HeaderSocial({ social }: HeaderSocialProps) {
+//   const { href, icon, id } = social;
+//   const isHovered = useStore(publicStore, ({ headerHoveredId }) => headerHoveredId === id);
 
-              <Link
-                to="/demo/start/ssr/full-ssr"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">Full SSR</span>
-              </Link>
+//   const handleOnMouseEnter = useCallback(() => setHeaderHoveredId(id), [id]);
 
-              <Link
-                to="/demo/start/ssr/data-only"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-                activeProps={{
-                  className:
-                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-                }}
-              >
-                <StickyNote size={20} />
-                <span className="font-medium">Data Only</span>
-              </Link>
-            </div>
-          )}
-
-          <Link
-            to="/demo/form/simple"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <ClipboardType size={20} />
-            <span className="font-medium">Simple Form</span>
-          </Link>
-
-          <Link
-            to="/demo/form/address"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <ClipboardType size={20} />
-            <span className="font-medium">Address Form</span>
-          </Link>
-
-          <Link
-            to="/demo/store"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
-            activeProps={{
-              className:
-                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
-            }}
-          >
-            <Store size={20} />
-            <span className="font-medium">Store</span>
-          </Link>
-
-          {/* Demo Links End */}
-        </nav>
-      </aside>
-    </>
-  )
-}
+//   return (
+//     <a className={HEADER.social()} href={href} key={id} onMouseEnter={handleOnMouseEnter}>
+//       {isHovered && <motion.div className={HEADER.stain({ intent: "primary" })} layoutId="hovered" />}
+//       <span className={HEADER.stainContent()}>{icon}</span>
+//     </a>
+//   );
+// }
+// export type HeaderSocialProps = { social: { icon: ReactNode; id: string; href: string; text: string } };
