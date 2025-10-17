@@ -1,7 +1,7 @@
 import { Image } from "@unpic/react";
-import { domAnimation, LazyMotion, type Transition } from "motion/react";
-import { div as Mdiv } from "motion/react-m";
-import { type ComponentProps, type PropsWithChildren, useEffect, useRef, useState } from "react";
+// import { domAnimation, LazyMotion, type Transition } from "motion/react";
+// import { div as Mdiv } from "motion/react-m";
+import type { ComponentProps, PropsWithChildren } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 import type { Images } from "@/data/images";
 
@@ -67,11 +67,11 @@ const sectionStyles = tv({
 const SECTION = sectionStyles();
 
 // TRANSITIONS -----------------------------------------------------------------------------------------------------------------------------
-const SECTION_T = {
-  titleRowEffect: { duration: 0.5, ease: "easeOut" },
-  titleRowPointerWrapper: { opacity: { duration: 0.1, ease: "easeInOut" }, duration: 1, ease: "easeInOut" },
-  titleRowRectangle: { duration: 1, ease: "easeInOut" },
-} satisfies Record<string, Transition>;
+// const SECTION_T = {
+//   titleRowEffect: { duration: 0.5, ease: "easeOut" },
+//   titleRowPointerWrapper: { opacity: { duration: 0.1, ease: "easeInOut" }, duration: 1, ease: "easeInOut" },
+//   titleRowRectangle: { duration: 1, ease: "easeInOut" },
+// } satisfies Record<string, Transition>;
 
 // ROOT ------------------------------------------------------------------------------------------------------------------------------------
 export function Section({ children, className: C = {}, intent = "default", reverse, ...props }: SectionProps) {
@@ -129,7 +129,7 @@ export function SectionTitle({ className: C = {}, intent = "primary", reverse, t
   return (
     <h2 {...props} className={SECTION.title({ intent, reverse, className: C.title })}>
       <span>{title[0]}</span>
-      <SectionTitleEffect className={C} intent={intent} reverse={reverse} text={title[1]} />
+      {/* <SectionTitleEffect className={C} intent={intent} reverse={reverse} text={title[1]} /> */}
     </h2>
   );
 }
@@ -144,92 +144,92 @@ export type SectionTitleProps = Omit<ComponentProps<"h2">, "className" | "title"
   };
 
 // EFFECT ----------------------------------------------------------------------------------------------------------------------------------
-export function SectionTitleEffect({ className: C = {}, intent, reverse, text }: SectionTitleEffectProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+// export function SectionTitleEffect({ className: C = {}, intent, reverse, text }: SectionTitleEffectProps) {
+//   const containerRef = useRef<HTMLDivElement>(null);
+//   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const { width, height } = containerRef.current.getBoundingClientRect();
-      setDimensions({ width, height });
-    }
+//   useEffect(() => {
+//     if (containerRef.current) {
+//       const { width, height } = containerRef.current.getBoundingClientRect();
+//       setDimensions({ width, height });
+//     }
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const { width, height } = entry.contentRect;
-        setDimensions({ width, height });
-      }
-    });
+//     const resizeObserver = new ResizeObserver((entries) => {
+//       for (const entry of entries) {
+//         const { width, height } = entry.contentRect;
+//         setDimensions({ width, height });
+//       }
+//     });
 
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
+//     if (containerRef.current) {
+//       resizeObserver.observe(containerRef.current);
+//     }
 
-    return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
-      }
-    };
-  }, []);
+//     return () => {
+//       if (containerRef.current) {
+//         resizeObserver.unobserve(containerRef.current);
+//       }
+//     };
+//   }, []);
 
-  return (
-    <div className={SECTION.titleRow({ intent, reverse, className: C.titleRow })} ref={containerRef}>
-      <span className={SECTION.titleRowText({ intent, reverse, className: C.titleRowText })}>{text}</span>
-      {dimensions.width > 0 && dimensions.height > 0 && (
-        <LazyMotion features={domAnimation}>
-          <Mdiv
-            animate={{ opacity: 1, scale: 1 }}
-            className={SECTION.titleRowEffect({ intent, reverse, className: C.titleRowEffect })}
-            initial={{ opacity: 0, scale: 0.95, originX: 0, originY: 0 }}
-            transition={SECTION_T.titleRowEffect}
-          >
-            <Mdiv
-              className={SECTION.titleRowRectangle({ intent, reverse, className: C.titleRowRectangle })}
-              transition={SECTION_T.titleRowRectangle}
-              whileInView={dimensions}
-            />
-            <Mdiv
-              className={SECTION.titleRowPointerWrapper({ intent, reverse, className: C.titleRowPointerWrapper })}
-              style={{ rotate: -90 }}
-              transition={SECTION_T.titleRowPointerWrapper}
-              // biome-ignore lint/style/noMagicNumbers: off
-              whileInView={{ opacity: 1, x: dimensions.width + 4, y: dimensions.height + 4 }}
-            >
-              <Pointer className={SECTION.titleRowPointer({ intent, reverse, className: C.titleRowPointer })} />
-            </Mdiv>
-          </Mdiv>
-        </LazyMotion>
-      )}
-    </div>
-  );
-}
-export type SectionTitleEffectProps = SectionVariants & {
-  className?: Pick<
-    SectionClass,
-    "titleRow" | "titleRowEffect" | "titleRowPointer" | "titleRowPointerWrapper" | "titleRowRectangle" | "titleRowText"
-  >;
-  text?: string;
-};
+//   return (
+//     <div className={SECTION.titleRow({ intent, reverse, className: C.titleRow })} ref={containerRef}>
+//       <span className={SECTION.titleRowText({ intent, reverse, className: C.titleRowText })}>{text}</span>
+//       {dimensions.width > 0 && dimensions.height > 0 && (
+//         <LazyMotion features={domAnimation}>
+//           <Mdiv
+//             animate={{ opacity: 1, scale: 1 }}
+//             className={SECTION.titleRowEffect({ intent, reverse, className: C.titleRowEffect })}
+//             initial={{ opacity: 0, scale: 0.95, originX: 0, originY: 0 }}
+//             transition={SECTION_T.titleRowEffect}
+//           >
+//             <Mdiv
+//               className={SECTION.titleRowRectangle({ intent, reverse, className: C.titleRowRectangle })}
+//               transition={SECTION_T.titleRowRectangle}
+//               whileInView={dimensions}
+//             />
+//             <Mdiv
+//               className={SECTION.titleRowPointerWrapper({ intent, reverse, className: C.titleRowPointerWrapper })}
+//               style={{ rotate: -90 }}
+//               transition={SECTION_T.titleRowPointerWrapper}
+//               // biome-ignore lint/style/noMagicNumbers: off
+//               whileInView={{ opacity: 1, x: dimensions.width + 4, y: dimensions.height + 4 }}
+//             >
+//               <Pointer className={SECTION.titleRowPointer({ intent, reverse, className: C.titleRowPointer })} />
+//             </Mdiv>
+//           </Mdiv>
+//         </LazyMotion>
+//       )}
+//     </div>
+//   );
+// }
+// export type SectionTitleEffectProps = SectionVariants & {
+//   className?: Pick<
+//     SectionClass,
+//     "titleRow" | "titleRowEffect" | "titleRowPointer" | "titleRowPointerWrapper" | "titleRowRectangle" | "titleRowText"
+//   >;
+//   text?: string;
+// };
 
-// POINTER ---------------------------------------------------------------------------------------------------------------------------------
-const Pointer = ({ ...props }: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    fill="currentColor"
-    height="1em"
-    stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth="1"
-    viewBox="0 0 16 16"
-    width="1em"
-    xmlns="http://www.w3.org/2000/svg"
-    // className="stroke-current fill-current stroke-1 size-4"
-    {...props}
-    aria-hidden="true"
-  >
-    <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z" />
-  </svg>
-);
+// // POINTER ---------------------------------------------------------------------------------------------------------------------------------
+// const Pointer = ({ ...props }: React.SVGProps<SVGSVGElement>) => (
+//   <svg
+//     fill="currentColor"
+//     height="1em"
+//     stroke="currentColor"
+//     strokeLinecap="round"
+//     strokeLinejoin="round"
+//     strokeWidth="1"
+//     viewBox="0 0 16 16"
+//     width="1em"
+//     xmlns="http://www.w3.org/2000/svg"
+//     // className="stroke-current fill-current stroke-1 size-4"
+//     {...props}
+//     aria-hidden="true"
+//   >
+//     <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z" />
+//   </svg>
+// );
 
 // TYPES -----------------------------------------------------------------------------------------------------------------------------------
 type SectionClass = Partial<(typeof sectionStyles)["slots"]>;
