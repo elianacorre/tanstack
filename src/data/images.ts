@@ -373,7 +373,7 @@ export const readImagesBySlugs = async (slugs: string[]) =>
       alt,
       background: blurhashToCssGradientString(blurhash),
       height,
-      src,
+      src: `${src}?q=50`,
       width,
     }));
 
