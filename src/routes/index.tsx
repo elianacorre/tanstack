@@ -8,8 +8,8 @@ import { tv } from "tailwind-variants";
 import { GridBackground } from "@/components/grid-background";
 import { Hero } from "@/components/hero";
 import { Section, SectionContent, SectionImage, SectionMain, SectionTitle } from "@/components/section";
+import { WorksGrid } from "@/components/works-grid";
 import { readIndexPage } from "@/data/pages";
-// import { WorksGrid } from "@/components/works-grid";
 
 // SERVER ----------------------------------------------------------------------------------------------------------------------------------
 // const readIndexPage = createServerFn({ method: "GET" }).handler(async () => convex.query(api.pages.readIndex, {}));
@@ -51,7 +51,7 @@ function IndexPage() {
       <Section className={{ base: "lg:-mt-20" }} intent="secondary">
         <SectionMain>
           <SectionTitle intent="secondary" title={works.title} />
-          {/* <WorksGrid works={works.items} /> */}
+          <WorksGrid works={works.items} />
         </SectionMain>
       </Section>
       <section className={QUOTE.base()}>

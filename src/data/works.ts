@@ -1262,3 +1262,5 @@ const items = [
 ];
 
 export const readLastWorks = async (count: number) => items.sort((a, b) => b.date.localeCompare(a.date)).slice(0, count);
+
+export type Works = { Entity: Awaited<ReturnType<typeof readLastWorks>>[number] };
