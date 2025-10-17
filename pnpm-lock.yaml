@@ -8,10 +8,10 @@ importers:
 
   .:
     dependencies:
-      '@fontsource/dancing-script':
+      '@fontsource-variable/dancing-script':
         specifier: ^5.2.8
         version: 5.2.8
-      '@fontsource/lexend':
+      '@fontsource-variable/lexend':
         specifier: ^5.2.11
         version: 5.2.11
       '@netlify/vite-plugin-tanstack-start':
@@ -755,11 +755,11 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
-  '@fontsource/dancing-script@5.2.8':
-    resolution: {integrity: sha512-zHVVgIQ5/rAIM0VVp1QMsqvJm9INHO5/C82E9rHT6NlabjaPTFYn8wl9lT4vPWizfB0TublGQM1999kfdA+XFA==}
+  '@fontsource-variable/dancing-script@5.2.8':
+    resolution: {integrity: sha512-K6Mkb5bn00WJTDsiKZ83p1hWZ3Q5U9YSH1nIp2ATknHi8ladevGGjIUQBs+LAgEr2y2W1XRV3VVuLsLVxH+G8g==}
 
-  '@fontsource/lexend@5.2.11':
-    resolution: {integrity: sha512-bShbQr2g2sWl7GJNyIxdllZST1faVbebXN6H7AEEDCRms/g4orDLxWnmTVodOtiErdZVUJURq4jpafZ34nIkTw==}
+  '@fontsource-variable/lexend@5.2.11':
+    resolution: {integrity: sha512-0hgEQ4O7Nh8fxL/WWmspJf0BErbocRkZwtLRGey/V4mUUqxfF7QUwqhcdzwpjom3NYCniY4uzQ5wYD7r9/92tQ==}
 
   '@humanwhocodes/momoa@2.0.4':
     resolution: {integrity: sha512-RE815I4arJFtt+FVeU1Tgp9/Xvecacji8w/V6XtXsWWH/wz/eNkNbhb+ny/+PlVZjV0rxQpRSQKNKE3lcktHEA==}
@@ -4949,9 +4949,9 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@fontsource/dancing-script@5.2.8': {}
+  '@fontsource-variable/dancing-script@5.2.8': {}
 
-  '@fontsource/lexend@5.2.11': {}
+  '@fontsource-variable/lexend@5.2.11': {}
 
   '@humanwhocodes/momoa@2.0.4': {}
 

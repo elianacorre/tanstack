@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/style/noHeadElement: off */
-// import "@fontsource-variable/dancing-script";
-// import "@fontsource-variable/lexend";
+import "@fontsource-variable/dancing-script";
+import "@fontsource-variable/lexend";
 // import { imageFrom } from "@ec/domain/utils/images";
 // import { publicStore, setHeaderHoveredId, setIsScrolled } from "@ec/ui/lib/stores";
 // import { HEADER, HEADER_T, HEADER_V } from "@ec/ui/styles/app/header";
