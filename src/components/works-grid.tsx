@@ -26,7 +26,7 @@ export function WorksGrid({ className: C = {}, works }: WorksGridProps) {
   return (
     <ul className={WORKS_GRID.base({ className: C.base })}>
       {works.map((work) => (
-        <li className={WORKS_GRID.item({ className: C.item })} key={work._id}>
+        <li className={WORKS_GRID.item({ className: C.item })} key={work.slug}>
           {/* <Zoom zoomImg={{ ...work.image, sizes: "100vw" }}> */}
           <Image
             {...work.image}

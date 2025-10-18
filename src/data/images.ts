@@ -1,6 +1,6 @@
 import { blurhashToCssGradientString } from "@unpic/placeholder";
 
-const items = [
+export const allImages = [
   {
     _creationTime: 1_758_465_764_791.5017,
     _id: "jd76rry5vatt4ssh1syystn6017r0565",
@@ -366,15 +366,20 @@ const items = [
   },
 ];
 
-export const readImagesBySlugs = async (slugs: string[]) =>
-  items
-    .filter(({ slug }) => slugs.includes(slug))
-    .map(({ alt, blurhash, height, src, width }) => ({
-      alt,
-      background: blurhashToCssGradientString(blurhash),
-      height,
-      src: `${src}?q=50`,
-      width,
-    }));
+export const imageFrom = ({ alt, blurhash, height, src, width }: Images["Entry"]) => ({
+  alt,
+  background: blurhashToCssGradientString(blurhash),
+  height,
+  src: `${src}?q=50`,
+  width,
+});
 
-export type Images = { Entity: Awaited<ReturnType<typeof readImagesBySlugs>>[number] };
+export const readImagesBySlugs = (slugs: string[]) => allImages.filter(({ slug }) => slugs.includes(slug)).map(imageFrom);
+
+export const readImageById = (id: string) => {
+  const entity = allImages.find(({ _id }) => _id === id);
+  if (!entity) throw new Error(`Image not found: ${id}`);
+  return imageFrom(entity);
+};
+
+export type Images = { Entity: ReturnType<typeof imageFrom>; Entry: (typeof allImages)[number] };

@@ -1,9 +1,14 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": [
-    "ultracite"
-  ],
- "formatter": {
+  "extends": ["ultracite"],
+  "formatter": {
     "lineWidth": 140
+  },
+  "linter": {
+    "rules": {
+      "style": {
+        "useBlockStatements": "off"
+      }
+    }
   }
 }

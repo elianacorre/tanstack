@@ -1,20 +1,11 @@
-const items = [
+import { readImageById } from "./images";
+
+export const allSets = [
   {
     _creationTime: 1_759_824_725_349.786,
     _id: "jh7f4jzf2tb7vxmd3tc2m2w07n7s0gbk",
     content:
       "Cette collection est une ode à la beauté, née d'un désir : celui de rappeler aux êtres humains que le monde est beau. Cette beauté que le monde a enfouie et douloureusement cachée en nous, nous pouvons la refaire jaillir à tout moment, la retrouver et l'exprimer à notre tour. Rappelons-nous la sensation du soleil sur la peau, l'odeur de la pluie, la chaleur réconfortante d'une forêt, la poésie qui se cache derrière chacun de nos gestes, l'effet d'une chanson sur notre âme, la musique d'un poème.",
-    image: {
-      _creationTime: 1_758_465_764_791.5054,
-      _id: "jd7csc9rm59rzg81jxyyfbbh5h7r1vyg",
-      alt: "Le bruit de la nuit",
-      blurhash: "U46]U|=[4TH=A5L#t,T18wR5$Lx^bvMdrqyY",
-      height: 2600,
-      slug: "le-bruit-de-la-nuit",
-      src: "https://capable-owl-338.convex.cloud/api/storage/9f395557-cc04-4399-b5ff-0d465bee1563",
-      storageId: "kg279zshpp1j5m1vbq0wpvj7597rwkqp",
-      width: 1955,
-    },
     imageId: "jd7csc9rm59rzg81jxyyfbbh5h7r1vyg",
     slug: "ode-a-la-beaute",
     title: "Ode à la beauté",
@@ -24,17 +15,6 @@ const items = [
     _id: "jh76h7whkdq85jz19qnswgte717s0bxf",
     content:
       "Dans cette collection, vous trouverez les animaux qui m'inspirent le plus, ceux qui résonnent avec mon âme. On retrouve ici un style plus graphique.",
-    image: {
-      _creationTime: 1_758_465_764_791.5024,
-      _id: "jd71wqvhk03cbmzfyfbv9a0qzx7r1zxf",
-      alt: "Bumblebee",
-      blurhash: "U9B#Oe%rC:-AGP9IH%t73KxGr3bbr~RRIoWT",
-      height: 2612,
-      slug: "bumblebee",
-      src: "https://capable-owl-338.convex.cloud/api/storage/6073ea11-d051-4da0-9237-0651128d1fb0",
-      storageId: "kg254m5asgnwj9gv87hsqn03y17rwm6n",
-      width: 1916,
-    },
     imageId: "jd71wqvhk03cbmzfyfbv9a0qzx7r1zxf",
     slug: "bestiaire",
     title: "Bestiaire",
@@ -44,17 +24,6 @@ const items = [
     _id: "jh7czqvb467a2beg89zfs1d1517s0cfg",
     content:
       "J'ai toujours eu pour les mains une étrange fascination. A travers ces oeuvres, je tente de capturer toute leur beauté et leur poésie.",
-    image: {
-      _creationTime: 1_758_465_764_791.5056,
-      _id: "jd763tedzn11rme2ds4ygspqnx7r1g7p",
-      alt: "Mains I",
-      blurhash: "UPJQQA$%1%w[~nbYa2nONLOrNbt5MxxaniRj",
-      height: 1876,
-      slug: "mains-i",
-      src: "https://capable-owl-338.convex.cloud/api/storage/442cb004-ce48-4ecc-bfb3-0f197e473e97",
-      storageId: "kg247d0qakvz46f2ncf0s56wa97rwpjc",
-      width: 2536,
-    },
     imageId: "jd763tedzn11rme2ds4ygspqnx7r1g7p",
     slug: "la-poetique-des-mains",
     title: "La poétique des mains",
@@ -64,19 +33,18 @@ const items = [
     _id: "jh7dkmxnmrf2159trbjg34yzf17s0sy5",
     content:
       "Le concept d'animal totem nous vient des peuples amérindiens et africains. Pour eux, chaque personne est reliée à l'esprit d'un animal qui nous guide, nous accompagne et nous protège. Son énergie vibre avec la nôtre et il est votre esprit gardien. Cette collection a vu le jour à la suite du contact thérapeutique des animaux sur mon être.",
-    image: {
-      _creationTime: 1_758_465_764_791.5034,
-      _id: "jd748adtpnzj3ft6k72g345dbn7r0anx",
-      alt: "Je te vois",
-      blurhash: "U5F$Li0F00VQ-tP65ro#+hk=5Z*_6X^+xZof",
-      height: 3062,
-      slug: "je-te-vois",
-      src: "https://capable-owl-338.convex.cloud/api/storage/f0262868-8ef2-4e3b-86e4-1e2ab4fa9f80",
-      storageId: "kg2efsnzcq380wr3h92fzqve2s7rwpp1",
-      width: 4113,
-    },
     imageId: "jd748adtpnzj3ft6k72g345dbn7r0anx",
     slug: "animal-totem",
     title: "Animal totem",
   },
 ];
+
+export const setFrom = ({ content, imageId, slug, title }: Sets["Entry"]) => ({ content, image: readImageById(imageId), slug, title });
+
+export const readSetById = (id: string) => {
+  const entity = allSets.find(({ _id }) => _id === id);
+  if (!entity) throw new Error(`ImSetage not found: ${id}`);
+  return setFrom(entity);
+};
+
+export type Sets = { Entity: ReturnType<typeof setFrom>; Entry: (typeof allSets)[number] };
